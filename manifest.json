@@ -28,8 +28,7 @@
         "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.0",
         "ports": [
           {
-            "container": 4209,
-            "host": 4209
+            "container": 4209
           }
         ],
         "environment": {
@@ -212,5 +211,10 @@
   },
   "onboarding": {
     "mode": "service"
+  },
+  "runtime_contract": {
+    "version": 1,
+    "port_binding": "core_allocated",
+    "port_env": "PORT"
   }
 }
