@@ -4,7 +4,7 @@ import os
 
 INTEGRATION_ID = "piphi-network-llm-vision"
 INTEGRATION_NAME = "Piphi Network Llm Vision"
-INTEGRATION_VERSION = "0.1.0"
+INTEGRATION_VERSION = "0.1.1"
 PROJECT_KIND = "sidecar"
 PROJECT_PRESET = "sidecar-worker"
 PROJECT_DOMAIN = "sidecar-service"

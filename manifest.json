@@ -3,7 +3,7 @@
   "manifest_version": "1.0",
   "id": "piphi-network-llm-vision",
   "name": "LLM vision sidecar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Run bounded, opt-in vision analysis for explicitly brokered camera media.",
   "metadata": {
     "generator": "piphi-network-create",
@@ -17,7 +17,7 @@
     "website": "https://piphi.io"
   },
   "license": "Apache-2.0",
-  "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.0",
+  "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.1",
   "platforms": [
     "linux"
   ],
@@ -25,7 +25,7 @@
     "linux": {
       "type": "container",
       "container": {
-        "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.0",
+        "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.1",
         "ports": [
           {
             "container": 4209
