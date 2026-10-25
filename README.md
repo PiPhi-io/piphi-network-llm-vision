@@ -55,6 +55,6 @@ media, perform autonomous device control, or enable continuous surveillance.
 ## Docker
 
 ```bash
-docker build -t docker.io/piphinetwork/piphi-network-llm-vision:0.1.0 .
-docker run --rm -p 4209:4209 docker.io/piphinetwork/piphi-network-llm-vision:0.1.0
+docker build -t docker.io/piphinetwork/piphi-network-llm-vision:0.1.1 .
+docker run --rm -p 4209:4209 docker.io/piphinetwork/piphi-network-llm-vision:0.1.1
 ```

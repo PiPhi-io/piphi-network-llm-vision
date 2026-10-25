@@ -4,4 +4,4 @@ COPY pyproject.toml ./
 COPY src ./src
 RUN pip install --no-cache-dir .
 EXPOSE 4209
-CMD ["uvicorn", "piphi_network_llm_vision.main:app", "--host", "0.0.0.0", "--port", "4209"]
+CMD ["python", "-m", "piphi_network_llm_vision.main"]
