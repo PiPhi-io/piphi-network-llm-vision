@@ -28,3 +28,4 @@ def test_runtime_implements_contract_routes() -> None:
 
     assert REQUIRED_ENDPOINTS == ["health", "entities", "command", "config", "ui_config"]
     assert "refresh" in COMMANDS
+    assert {"analyze_image", "cancel_analysis"} <= set(COMMANDS)

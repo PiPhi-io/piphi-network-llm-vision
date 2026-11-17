@@ -3,7 +3,7 @@
   "manifest_version": "1.0",
   "id": "piphi-network-llm-vision",
   "name": "LLM vision sidecar",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Run bounded, opt-in vision analysis for explicitly brokered camera media.",
   "metadata": {
     "generator": "piphi-network-create",
@@ -17,7 +17,7 @@
     "website": "https://piphi.io"
   },
   "license": "Apache-2.0",
-  "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.2",
+  "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.3",
   "platforms": [
     "linux"
   ],
@@ -25,7 +25,7 @@
     "linux": {
       "type": "container",
       "container": {
-        "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.2",
+        "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.3",
         "ports": [
           {
             "container": 4209
@@ -81,7 +81,12 @@
     "editable_fields": [
       "host",
       "alias",
-      "service_name"
+      "base_url",
+      "service_name",
+      "media_broker_url",
+      "queue_capacity",
+      "request_timeout_seconds",
+      "max_output_tokens"
     ],
     "runtime_fields": [
       "id",
@@ -91,6 +96,10 @@
     ],
     "identity_fields": [
       "host"
+    ],
+    "secret_fields": [
+      "api_key",
+      "media_broker_token"
     ]
   },
   "identity": {
@@ -103,13 +112,72 @@
       "kind": "sensor",
       "unit": "bool"
     },
+    "service_available": {
+      "kind": "sensor",
+      "unit": "bool"
+    },
+    "queue_depth": {
+      "kind": "sensor",
+      "unit": "jobs"
+    },
+    "queue_capacity": {
+      "kind": "sensor",
+      "unit": "jobs"
+    },
+    "active_job_count": {
+      "kind": "sensor",
+      "unit": "jobs"
+    },
+    "worker_count": {
+      "kind": "sensor"
+    },
+    "jobs_completed_total": {
+      "kind": "sensor",
+      "unit": "jobs"
+    },
+    "jobs_failed_total": {
+      "kind": "sensor",
+      "unit": "jobs"
+    },
+    "job_status": {
+      "kind": "sensor"
+    },
+    "analysis_summary": {
+      "kind": "sensor"
+    },
+    "analysis_structured_result": {
+      "kind": "sensor"
+    },
+    "source_camera_id": {
+      "kind": "sensor"
+    },
+    "last_success_at": {
+      "kind": "sensor"
+    },
+    "degraded_reason": {
+      "kind": "sensor"
+    },
     "refresh": {
+      "kind": "action"
+    },
+    "analyze_image": {
+      "kind": "action"
+    },
+    "cancel_analysis": {
       "kind": "action"
     }
   },
   "commands": {
     "refresh": {
-      "description": "Refresh the device state.",
+      "description": "Refresh the service state.",
+      "timeout_ms": 5000
+    },
+    "analyze_image": {
+      "description": "Queue analysis of one PiPhi-brokered image.",
+      "timeout_ms": 5000
+    },
+    "cancel_analysis": {
+      "description": "Cancel one queued or running analysis job.",
       "timeout_ms": 5000
     }
   },
@@ -121,12 +189,37 @@
       "entity_type": "service",
       "capabilities": [
         "connected",
-        "refresh"
+        "service_available",
+        "queue_depth",
+        "queue_capacity",
+        "active_job_count",
+        "worker_count",
+        "jobs_completed_total",
+        "jobs_failed_total",
+        "job_status",
+        "analysis_summary",
+        "analysis_structured_result",
+        "source_camera_id",
+        "last_success_at",
+        "degraded_reason",
+        "refresh",
+        "analyze_image",
+        "cancel_analysis"
       ],
       "available_commands": [
         {
           "id": "refresh",
           "label": "Refresh",
+          "kind": "action"
+        },
+        {
+          "id": "analyze_image",
+          "label": "Analyze brokered image",
+          "kind": "action"
+        },
+        {
+          "id": "cancel_analysis",
+          "label": "Cancel analysis",
           "kind": "action"
         }
       ],
