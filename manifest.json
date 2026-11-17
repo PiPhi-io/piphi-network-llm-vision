@@ -3,7 +3,7 @@
   "manifest_version": "1.0",
   "id": "piphi-network-llm-vision",
   "name": "LLM vision sidecar",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Run bounded, opt-in vision analysis for explicitly brokered camera media.",
   "metadata": {
     "generator": "piphi-network-create",
@@ -17,7 +17,7 @@
     "website": "https://piphi.io"
   },
   "license": "Apache-2.0",
-  "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.1",
+  "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.2",
   "platforms": [
     "linux"
   ],
@@ -25,15 +25,23 @@
     "linux": {
       "type": "container",
       "container": {
-        "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.1",
+        "image": "docker.io/piphinetwork/piphi-network-llm-vision:0.1.2",
         "ports": [
           {
             "container": 4209
           }
         ],
         "environment": {
-          "LOG_LEVEL": "info"
+          "LOG_LEVEL": "info",
+          "PIPHI_AUTOMATION_LEDGER_PATH": "/data/piphi/automation-actions.sqlite3"
         },
+        "volumes": [
+          {
+            "host": "/var/lib/piphi/llm-vision",
+            "container": "/data/piphi",
+            "mode": "rw"
+          }
+        ],
         "restart_policy": {
           "name": "unless-stopped",
           "maximum_retry_count": 0

@@ -55,6 +55,14 @@ media, perform autonomous device control, or enable continuous surveillance.
 ## Docker
 
 ```bash
-docker build -t docker.io/piphinetwork/piphi-network-llm-vision:0.1.1 .
-docker run --rm -p 4209:4209 docker.io/piphinetwork/piphi-network-llm-vision:0.1.1
+docker build -t docker.io/piphinetwork/piphi-network-llm-vision:0.1.2 .
+docker volume create piphi-llm-vision-data
+docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
+  --tmpfs /tmp:rw,noexec,nosuid,size=64m \
+  -v piphi-llm-vision-data:/data/piphi \
+  -p 127.0.0.1:4209:4209 docker.io/piphinetwork/piphi-network-llm-vision:0.1.2
 ```
+
+The runtime and persistent idempotency ledger execute as UID/GID `10001`.
+Deployments using the manifest's bind mount must provision
+`/var/lib/piphi/llm-vision` for that ownership before startup.
