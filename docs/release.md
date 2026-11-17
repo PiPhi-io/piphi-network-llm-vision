@@ -21,5 +21,5 @@ the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` repository secrets.
 Current image target:
 
 ```text
-docker.io/piphinetwork/piphi-network-llm-vision:0.1.1
+docker.io/piphinetwork/piphi-network-llm-vision:0.1.2
 ```
